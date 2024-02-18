@@ -11,7 +11,7 @@ class Program
     /// </remarks>
     private static int _speed = 5;
 
-    static void Main(string[] args)
+    static void Main()
     {
         var initialDirection = Direction.Left;
         var app = Initialize(initialDirection);
@@ -20,8 +20,8 @@ class Program
 
     private static SnakeApp Initialize(Direction initialDirection)
     {
-        var field = new Field(25, 20);
-        var snake = new Snake(field, initialDirection, 7);
+        var field = new Field(15, 15);
+        var snake = new Snake(field, initialDirection, 9);
 
         var app = new SnakeApp(snake);
         return app;
@@ -33,17 +33,17 @@ class Program
         var threadSleepValue = 1100 - (_speed * 200);
         var snake = app.GetSnake(initialDirection);
         var currentDirection = initialDirection;
-        //TODO:
         var snakePrinter = new SnakePrinter();
+        var autoResetEvent = new AutoResetEvent(false);
         var snakeThread = new Thread(() =>
         {
             do
             {
+                autoResetEvent.Set();
                 Thread.Sleep(threadSleepValue);
                 snake = app.GetSnake(currentDirection);
-                Console.Clear();
+                Console.SetCursorPosition(0, 0);
                 Console.WriteLine(currentDirection.ToString());
-                //TODO:
                 snakePrinter.Print(snake);
             } while (true);
         });
@@ -52,7 +52,7 @@ class Program
         {
             while (true)
             {
-                Thread.Sleep(threadSleepValue);
+                autoResetEvent.WaitOne();
                 var direction = GetCurrentDirection();
                 if (direction != null)
                     currentDirection = (Direction)direction;

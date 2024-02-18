@@ -12,11 +12,29 @@ namespace snake
                 for(int j = 0; j < field.HorizontalSize - 1; j++)
                 {
                     var symbol = GetSymbol(field.FieldArray[i,j], snake.Direction);
+                    Console.ForegroundColor = GetColor(symbol);
+                    //Console.Write($"{field.FieldArray[i, j]} ");
                     Console.Write($"{symbol} ");
                 }
                 Console.Write("\n");
             }
         }
+        private ConsoleColor GetColor(char symbol)
+        {
+            if (symbol == SnakeConstants.EMPTY_SIGN)
+                return ConsoleColor.Gray;
+            if (symbol == SnakeConstants.APPLE_SIGN)
+                return ConsoleColor.Red;
+            if (symbol == SnakeConstants.BODY_SIGN)
+                return ConsoleColor.Green;
+            if (symbol == SnakeConstants.HEAD_UP_SIGN ||
+                symbol == SnakeConstants.HEAD_RIGHT_SIGN ||
+                symbol == SnakeConstants.HEAD_DOWN_SIGN ||
+                symbol == SnakeConstants.HEAD_LEFT_SIGN)
+                return ConsoleColor.DarkGreen;
+            return ConsoleColor.White;
+        }
+
         private char GetSymbol(int number, Direction direction)
         {
             if (number == 0)

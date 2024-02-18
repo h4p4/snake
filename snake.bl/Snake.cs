@@ -12,13 +12,13 @@
             if (initialDirection == Direction.Left)
             {
                 TailVerticalIndex = HeadVerticalIndex;
-                TailHorizontalIndex = HeadHorizontalIndex - initialSize;
-
-                for (int i = TailHorizontalIndex, snakeIndex = 1; 
-                    i < HeadHorizontalIndex; i++, snakeIndex++)
-                {
-                    Field.FieldArray[HeadVerticalIndex, i] = snakeIndex;
-                }
+                TailHorizontalIndex = HeadHorizontalIndex - 1;
+                Field.FieldArray[TailVerticalIndex - 2, TailHorizontalIndex - 2] = -1;
+                var snakeNumber = 1;
+                //for (int i = TailHorizontalIndex; i > HeadHorizontalIndex; i--)
+                //{
+                //    Field.FieldArray[TailVerticalIndex, TailHorizontalIndex] = snakeNumber++;
+                //}
                 return;
             }
             var errorMessage = $"Изначальное направление {initialDirection} не реализовано.";
