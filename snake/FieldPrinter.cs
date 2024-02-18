@@ -7,9 +7,9 @@ namespace snake
         internal void Print(Snake snake)
         {
             var field = snake.Field;
-            for (int i = 0; i < field.VerticalSize - 1; i++)
+            for (int i = 0; i < field.VerticalSize; i++)
             {
-                for(int j = 0; j < field.HorizontalSize - 1; j++)
+                for(int j = 0; j < field.HorizontalSize; j++)
                 {
                     var symbol = GetSymbol(field.FieldArray[i,j], snake.Direction);
                     Console.ForegroundColor = GetColor(symbol);

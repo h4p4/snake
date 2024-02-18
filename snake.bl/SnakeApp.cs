@@ -21,9 +21,9 @@ public class SnakeApp
         var tail = 0;
         List<(int x, int y)> emptyIndicies = new List<(int x, int y)> ();
 
-        for (var i = 0; i < field.VerticalSize - 1; i++)
+        for (var i = 0; i < field.VerticalSize; i++)
         {
-            for (var j = 0; j < field.HorizontalSize - 1; j++)
+            for (var j = 0; j < field.HorizontalSize; j++)
             {
                 if (_fieldArray[i, j] == 0)
                 {
